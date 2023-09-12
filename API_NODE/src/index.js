@@ -6,7 +6,8 @@ var mysql = require('mysql');
 //configurações mysql //
 
 const connection = mysql.createConnection({
-    host: 'mysql-container-instance',
+    // host: 'mysql-container-instance',
+    host: '172.17.0.2',
     user: 'root',
     password: 'databasesql',
     database: 'DATALAKE_SQL'
@@ -35,7 +36,6 @@ app.get('/products', function(req,res){
                 res.send('Erro ao carregar a query')
                 throw error
             };
-
             res.send(
                 results.map(
                     item => ({
