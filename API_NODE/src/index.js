@@ -1,5 +1,7 @@
-import express from 'express';
-import mysql from 'mysql';
+// import express from 'express';
+// import mysql from 'mysql';
+var express = require('express'); 
+var mysql = require('mysql');
 
 //configurações mysql //
 
@@ -17,6 +19,10 @@ connection.connect();
 const app = express();
 
 app.listen(9001, '0.0.0.0', chamadaInitial())
+
+app.get('/', (req, res) => {
+    res.send('hello world')
+  })
 
 app.get('/products', function(req,res){
     connection.query(
@@ -40,6 +46,6 @@ app.get('/products', function(req,res){
 
 
 function chamadaInitial(){
-    console.log(" Escutando a porta 9001")
+    console.log("Escutando a porta 9001")
 }
 
