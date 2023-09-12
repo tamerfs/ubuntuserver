@@ -18,10 +18,12 @@ connection.connect();
 
 const app = express();
 
-app.listen(9001, '0.0.0.0', chamadaInitial())
+app.listen(9001, '0.0.0.0', function(){
+    console.log("http://localhost:9001")
+})
 
 app.get('/', (req, res) => {
-    res.send('hello world')
+    res.send('hello world <br> Acesse ao <a href="http://localhost:9001/products">LINK<a/>')
   })
 
 app.get('/products', function(req,res){
@@ -29,6 +31,8 @@ app.get('/products', function(req,res){
         'SELECT * FROM products', 
         function(error, results){
             if (error){
+                console.log("Erro ao carregar a query")
+                res.send('Erro ao carregar a query')
                 throw error
             };
 
@@ -45,7 +49,4 @@ app.get('/products', function(req,res){
 })
 
 
-function chamadaInitial(){
-    console.log("Escutando a porta 9001")
-}
 
