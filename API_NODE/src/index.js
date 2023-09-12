@@ -6,7 +6,7 @@ var mysql = require('mysql');
 //configurações mysql //
 
 const connection = mysql.createConnection({
-    host: '172.17.0.2',
+    host: 'mysql-container-instance',
     user: 'root',
     password: 'databasesql',
     database: 'DATALAKE_SQL'
