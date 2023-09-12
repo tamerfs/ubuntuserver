@@ -1,4 +1,4 @@
-
+USE DATALAKE_SQL;
 INSERT INTO products VALUE(0, 'produto_01', 2500);
 INSERT INTO products VALUE(0, 'produto_02', 5500);
 INSERT INTO products VALUE(0, 'produto_03', 1700);
