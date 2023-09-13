@@ -13,4 +13,4 @@ RUN npm install
 # Bundle app source
 COPY --chown=node:node . .
 EXPOSE 8080
-CMD [ "node", "server.js", "index.js"]
+CMD [ "start", "dev"]

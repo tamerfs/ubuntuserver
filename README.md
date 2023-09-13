@@ -67,6 +67,8 @@ docker run -d -v $(pwd)/data:/var/lib/{meu-programa} --rm --name meu-container-i
 
 docker run -d -v $(pwd)/db:$(pwd)/persistent_disk/mysql --rm --name mysql-container-instancia mysql-image 
 docker run -d -v $(pwd)/API_NODE:$(pwd)/persistent_disk/node -p9001:9001 --link instance-mysql --rm --name instance-node-alpine node-image
+docker run -d -v $(pwd)/API_NODE:$(pwd)/persistent_disk/node -p9001:9001 --link instance-mysql --restart=always --name instance-node alpine10/node-image
+
 
  -d -> daemon ou detach, para executar mas desacoplado deixando o terminal livre
  -v -> volume, ou seja, liga a pasta host a pasta container (bind mount a volume)
