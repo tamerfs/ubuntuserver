@@ -13,18 +13,6 @@ ultimo comando usado para subir o mysql com o node lincando na mesma rede:
 
 *git pull -> serverubuntu ( /home/tamer/dockerserver ou ~/dockerserver )*
 
-[stackoverflow - connection refused on docker container](https://stackoverflow.com/questions/36813690/connection-refused-on-docker-container)
-
-[superuser - connnect to linux using putty over the internet](https://superuser.com/questions/830568/connnect-to-linux-from-windows-using-putty-over-the-internet)
-
-[hostinger - tutorial docker](https://www.hostinger.com.br/tutoriais/install-docker-ubuntu)
-[tutorial docker]("https://codenotary.com/blog/extremely-useful-docker-commands#:~:text=docker%20stop%20mycontainer%20stops%20one,q)%20stops%20all%20running%20containers.")
-
-[docker run -d -net=host {imagem}](https://linuxhint.com/what-does-net-host-option-in-docker-compose-really-do/#:~:text=The%20%E2%80%9C%E2%80%93net%3Dhost%E2%80%9D%20option%20is%20utilized%20to%20execute,option%20%E2%80%9D%20command.)
-
-[docker logs](https://sematext.com/blog/docker-logs-location/)
-
-[journalctl -f](https://www.digitalocean.com/community/tutorials/how-to-use-journalctl-to-view-and-manipulate-systemd-logs-pt)
 _____________
 
 ### Comandos gerais no docker
@@ -34,8 +22,9 @@ docker image ls    =>     lista as imagens do docker baixadas no local disponív
 docker ps  =>  mostra os processos ou containes ativos.
 docker rmi {idImagem}  =>  remover imagens pelo ID ( -f para forçar )  
 docker inspect {nome do container} =>  para ver informações de um container 
---restart=always
 docker ps -a -q ( parar todos os containers e exlcuir)
+docker logs 9e1a64dfc970 {container ID}
+sudo aa-remove-unknown {limpa o apparmor do linux que bloqueia as ações que desligam os dockers criados}
 ```
 
 ### ***build*** [docs](https://docs.docker.com/engine/reference/commandline/build/)
@@ -67,7 +56,7 @@ Dockerfile . -> parametros que podemos usar na hora da criação da imagem
 docker run -d --rm --name {nome-do-meu-container} {nome-da-minha-image-salva}
 
  -d -> daemon ou detach se nao vai prender o terminal
- -- rm ->  remove se ja tiver um de pé
+ --rm ->  remove se ja tiver um de pé
  --name  -> nome do novo container a subir
 ```
 
@@ -77,7 +66,7 @@ docker run -d --rm --name {nome-do-meu-container} {nome-da-minha-image-salva}
 docker run -d -v $(pwd)/data:/var/lib/{meu-programa} --rm --name meu-container-instancia minha-imagem-baixada 
 
 docker run -d -v $(pwd)/db:$(pwd)/persistent_disk/mysql --rm --name mysql-container-instancia mysql-image 
-docker run -d -v $(pwd)/API_NODE:$(pwd)/persistent_disk/node -p9001:9001 --link mysql-container-instancia --rm --name node-container-instancia node-image
+docker run -d -v $(pwd)/API_NODE:$(pwd)/persistent_disk/node -p9001:9001 --link instance-mysql --rm --name instance-node-alpine node-image
 
  -d -> daemon ou detach, para executar mas desacoplado deixando o terminal livre
  -v -> volume, ou seja, liga a pasta host a pasta container (bind mount a volume)
@@ -87,6 +76,7 @@ docker run -d -v $(pwd)/API_NODE:$(pwd)/persistent_disk/node -p9001:9001 --link 
  --link -> relacionar um conteiner no outro (Add link to another container)
  --rm ->  remove se ja tiver um de pé
  --name  -> nome do novo container a subir
+ --restart=always -> para coocar um container para rodar mesmo quando quebrar
 $(pwd) -> print working directory/ coloca o diretorio atual no comando como uma variavel
 
 funcionamento => diretório/da/imagem/atual: diretório/do/volume
@@ -99,7 +89,7 @@ funcionamento => diretório/da/imagem/atual: diretório/do/volume
 ```bash
 docker exec -i {nome-do-meu-container} {meu-programa} {comandos utilizados}
 
-docker exec -i mysql-container-instance mysql -uroot -pdatabasesql < api/db/script.sql
+docker exec -i instance-mysql mysql -uroot -pdatabasesql < db/initial_script_database.sql
 
 nome-do-meu-container -> nome do container que vamos utilizar como mysql-container
 meu-programa -> será o programa que vamos utilizar como por exemplo o mysql
@@ -127,7 +117,7 @@ bin/bash -> abre na linha para usar o bash/prompt para comandos
 ```bash
 bash# mysql -uroot -pdatabasesql
 mysql> USE {banco de dados} databasesql;
-mysql> SELECT * FROM {nome da tabela criada} devices;
+mysql> SELECT * FROM {nome da tabela criada};
 ```
 
 #### Exemplo usando npm e node no bash
@@ -138,8 +128,13 @@ npm install --save-dev nodemon (manter a aplicação sempre rodando)
 npm install --save express mysql
 ```
 
-{
-    "MD013": false
-}
-
- docker logs 9e1a64dfc970
+____________________________
+[stackoverflow - connection refused on docker container](https://stackoverflow.com/questions/36813690/connection-refused-on-docker-container) <br>
+[superuser - connnect to linux using putty over the internet](https://superuser.com/questions/830568/connnect-to-linux-from-windows-using-putty-over-the-internet)<br>
+[hostinger - tutorial docker](https://www.hostinger.com.br/tutoriais/install-docker-ubuntu)<br>
+[tutorial docker](https://codenotary.com/blog/extremely-useful-docker-commands#:~:text=docker%20stop%20mycontainer%20stops%20one,q%20stops%20all%20running%20containers.)<br>
+[docker run -d -net=host {imagem}](https://linuxhint.com/what-does-net-host-option-in-docker-compose-really-do/#:~:text=The%20%E2%80%9C%E2%80%93net%3Dhost%E2%80%9D%20option%20is%20utilized%20to%20execute,option%20%E2%80%9D%20command.)<br>
+[docker logs](https://sematext.com/blog/docker-logs-location/)<br>
+[journalctl -f](https://www.digitalocean.com/community/tutorials/how-to-use-journalctl-to-view-and-manipulate-systemd-logs-pt)<br>
+[Docker and Node best practices](https://github.com/nodejs/docker-node/blob/main/docs/BestPractices.md)<br>
+[Digital ocean and Node](https://www.digitalocean.com/community/tutorials/how-to-build-a-node-js-application-with-docker)<br>

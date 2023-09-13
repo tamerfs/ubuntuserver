@@ -1,7 +1,7 @@
 FROM node:10-alpine
 # Create app directory
-RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
-WORKDIR /home/node/app
+RUN mkdir -p /home/tamer/dockerserver/API_NODE/node_modules && chown -R node:node /home/tamer/dockerserver/API_NODE
+WORKDIR /home/tamer/dockerserver/API_NODE
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
 # where available (npm@5+)
@@ -13,4 +13,4 @@ RUN npm install
 # Bundle app source
 COPY --chown=node:node . .
 EXPOSE 8080
-CMD [ "node", "app.js","start" ]
+CMD [ "node", "server.js", "index.js"]
