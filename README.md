@@ -11,7 +11,7 @@ proximos passos :
 
 ultimo comando usado para subir o mysql com o node lincando na mesma rede:
 
-*git pull -> serverubuntu*
+*git pull -> serverubuntu (/home/tamer/dockerserver)*
 
 [stackoverflow - connection refused on docker container](https://stackoverflow.com/questions/36813690/connection-refused-on-docker-container)
 
@@ -73,8 +73,8 @@ docker run -d --rm --name {nome-do-meu-container} {nome-da-minha-image-salva}
 ```bash
 docker run -d -v $(pwd)/data:/var/lib/{meu-programa} --rm --name meu-container-instancia minha-imagem-baixada 
 
-docker run -d -v $(pwd)/data:/var/lib/mysql --rm --name mysql-container-instancia mysql-image 
-docker run -d -v $(pwd)/data:var//lib/node -p9001:9001 --link mysql-container --rm --name node-container-instancia node-image
+docker run -d -v $(pwd)/db:$(pwd)/persistent_disk/mysql --rm --name mysql-container-instancia mysql-image 
+docker run -d -v $(pwd)/API_NODE:$(pwd)/persistent_disk/node -p9001:9001 --link mysql-container --rm --name node-container-instancia node-image
 
  -d -> daemon ou detach, para executar mas desacoplado deixando o terminal livre
  -v -> volume, ou seja, liga a pasta host a pasta container
