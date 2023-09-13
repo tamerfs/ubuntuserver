@@ -10,3 +10,7 @@ proximos passos :
 -> adicionar a API node
 -> interligar via rede Nodes e Pods
 -> adicionar outros usuarios
+
+```
+docker run -d -v $(pwd):/home/node/app -p9001:9001 --link mysql-container-instance --rm --name node-container-instance node-image
+```
