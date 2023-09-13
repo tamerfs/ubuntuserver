@@ -11,13 +11,14 @@ proximos passos :
 
 ultimo comando usado para subir o mysql com o node lincando na mesma rede:
 
-*git pull -> serverubuntu (/home/tamer/dockerserver)*
+*git pull -> serverubuntu ( /home/tamer/dockerserver ou ~/dockerserver )*
 
 [stackoverflow - connection refused on docker container](https://stackoverflow.com/questions/36813690/connection-refused-on-docker-container)
 
 [superuser - connnect to linux using putty over the internet](https://superuser.com/questions/830568/connnect-to-linux-from-windows-using-putty-over-the-internet)
 
 [hostinger - tutorial docker](https://www.hostinger.com.br/tutoriais/install-docker-ubuntu)
+[tutorial docker]("https://codenotary.com/blog/extremely-useful-docker-commands#:~:text=docker%20stop%20mycontainer%20stops%20one,q)%20stops%20all%20running%20containers.")
 
 [docker run -d -net=host {imagem}](https://linuxhint.com/what-does-net-host-option-in-docker-compose-really-do/#:~:text=The%20%E2%80%9C%E2%80%93net%3Dhost%E2%80%9D%20option%20is%20utilized%20to%20execute,option%20%E2%80%9D%20command.)
 
@@ -33,9 +34,11 @@ docker image ls    =>     lista as imagens do docker baixadas no local disponív
 docker ps  =>  mostra os processos ou containes ativos.
 docker rmi {idImagem}  =>  remover imagens pelo ID ( -f para forçar )  
 docker inspect {nome do container} =>  para ver informações de um container 
+--restart=always
+docker ps -a -q ( parar todos os containers e exlcuir)
 ```
 
-### ***build***
+### ***build*** [docs](https://docs.docker.com/engine/reference/commandline/build/)
 
 #### Criar ou Baixar uma imagem padrão na nuvem com um Dockerfile
 
@@ -44,11 +47,11 @@ docker inspect {nome do container} =>  para ver informações de um container
 docker build -t {nome-image} -f {diretorio-do-dockerfile}/Dockerfile .
 docker build -t {sua_tag}/{nome-image} -f {diretorio-do-dockerfile}/Dockerfile .
 
-docker build -t mysql-image -f ./dockerserver/API_NODE/Dockerfile .
-docker build -t node-image -f ./dockerserver/db/Dockerfile .
+docker build -t mysql-image -f ./db/Dockerfile .
+docker build -t node-image -f ./API_NODE/Dockerfile .
 
  -f -> endereço do dockerfile
- -t -> taguear a imagem a subir #tty significa usar o terminal
+ -t -> taguear a imagem a subir
 Dockerfile . -> parametros que podemos usar na hora da criação da imagem
 
 ```
@@ -56,7 +59,7 @@ Dockerfile . -> parametros que podemos usar na hora da criação da imagem
 * diretorio arquivo da API node : ~/dockerserver/API_NODE/Dockerfile
 * diretorio arquivo do db mySQL : ~/dockerserver/db/Dockerfile
 
-### ***run***
+### ***run*** [docs](https://docs.docker.com/engine/reference/commandline/run/)
 
 #### Subir um container a partir de uma imagem baixada
 
@@ -74,12 +77,14 @@ docker run -d --rm --name {nome-do-meu-container} {nome-da-minha-image-salva}
 docker run -d -v $(pwd)/data:/var/lib/{meu-programa} --rm --name meu-container-instancia minha-imagem-baixada 
 
 docker run -d -v $(pwd)/db:$(pwd)/persistent_disk/mysql --rm --name mysql-container-instancia mysql-image 
-docker run -d -v $(pwd)/API_NODE:$(pwd)/persistent_disk/node -p9001:9001 --link mysql-container --rm --name node-container-instancia node-image
+docker run -d -v $(pwd)/API_NODE:$(pwd)/persistent_disk/node -p9001:9001 --link mysql-container-instancia --rm --name node-container-instancia node-image
 
  -d -> daemon ou detach, para executar mas desacoplado deixando o terminal livre
- -v -> volume, ou seja, liga a pasta host a pasta container
+ -v -> volume, ou seja, liga a pasta host a pasta container (bind mount a volume)
  -p -> porta do link entre os dois
- --link -> relacionar um conteiner no outro
+ -t -> Aloca um pseudo TTY 
+ -i -> Keep STDIN open even if not attached (interactive)
+ --link -> relacionar um conteiner no outro (Add link to another container)
  --rm ->  remove se ja tiver um de pé
  --name  -> nome do novo container a subir
 $(pwd) -> print working directory/ coloca o diretorio atual no comando como uma variavel
@@ -87,7 +92,7 @@ $(pwd) -> print working directory/ coloca o diretorio atual no comando como uma 
 funcionamento => diretório/da/imagem/atual: diretório/do/volume
 ```
 
-### ***exec***
+### ***exec*** [docs](https://docs.docker.com/engine/reference/commandline/exec/)
 
 #### Executar arquivos dentro de uma container
 
@@ -97,7 +102,7 @@ docker exec -i {nome-do-meu-container} {meu-programa} {comandos utilizados}
 docker exec -i mysql-container-instance mysql -uroot -pdatabasesql < api/db/script.sql
 
 nome-do-meu-container -> nome do container que vamos utilizar como mysql-container
-meu-programa -> será o programa que vamos utilizar como por exemplo o __mysql__
+meu-programa -> será o programa que vamos utilizar como por exemplo o mysql
  -u  -> usuário
  -p  -> senha de acesso ao sql
  -i  -> comando no modo interativo -> processo como shell executar o processo até que tudo do como script.sql seja executado
@@ -136,3 +141,5 @@ npm install --save express mysql
 {
     "MD013": false
 }
+
+ docker logs 9e1a64dfc970

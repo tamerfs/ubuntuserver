@@ -1,6 +1,7 @@
 FROM node:18
 # Create app directory
-WORKDIR /home/tamer/dockerserver/API_NODE
+#WORKDIR /home/tamer/dockerserver/API_NODE
+WORKDIR ~/dockerserver/API_NODE
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
 # where available (npm@5+)
