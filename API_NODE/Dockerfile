@@ -1,11 +1,12 @@
 #FROM node:10-alpine
-FROM node:12-stretch
+#FROM node:12-stretch
+FROM node:16
 # Create app directory
 USER node
 RUN mkdir /home/node/code
-RUN pwd
+RUN echo "PWD is: $PWD"
 WORKDIR /home/node/app
-RUN pwd
+RUN echo "PWD is: $PWD"
 COPY --chown=node:node .. .
 RUN ls -al
 #C:\WorkSpace\05_VM e Containers\ubuntuserver\API_NODE\Dockerfile
@@ -15,6 +16,7 @@ RUN ls -al
 # here 8000 is the default value if no value is passed during runtime. 
 ARG PORT_ARG=9001
 ENV PORT=$PORT_ARG
+RUN echo "PORT is: $PORT"
 RUN npm install
 # If you are building your code for production
 # RUN npm ci --omit=dev
