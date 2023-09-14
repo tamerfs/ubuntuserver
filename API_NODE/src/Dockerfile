@@ -5,6 +5,9 @@ WORKDIR /home/tamer/dockerserver/API_NODE
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
 # where available (npm@5+)
+# here 8000 is the default value if no value is passed during runtime. 
+ARG PORT_ARG=9001
+ENV PORT=$PORT_ARG
 COPY package*.json ./
 USER node
 RUN npm install
@@ -12,5 +15,5 @@ RUN npm install
 # RUN npm ci --omit=dev
 # Bundle app source
 COPY --chown=node:node . .
-EXPOSE 8080
-CMD [ "start", "dev"]
+EXPOSE $PORT
+CMD [ "npm", "run", "start"]

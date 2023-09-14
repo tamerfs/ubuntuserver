@@ -14,4 +14,4 @@ const connectionDb = mysql.createConnection({
 
 connectionDb.connect()
 
-export default connectionDb
+exports.connectionDb = connectionDb

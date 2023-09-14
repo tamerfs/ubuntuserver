@@ -37,6 +37,9 @@ docker ps -a -q => delete all stopped containers with docker rm
 docker build -t {nome-image} -f {diretorio-do-dockerfile}/Dockerfile .
 docker build -t {sua_tag}/{nome-image} -f {diretorio-do-dockerfile}/Dockerfile .
 
+docker build -t {imagem_a_baixar} --build-{variavel}={valor}  -f {diretorio-do-dockerfile}/Dockerfile .
+docker build -t {imagem_a_baixar} --build-arg PORT_ARG=8081  -f {diretorio-do-dockerfile}/Dockerfile .
+
 docker build -t mysql-image -f ./db/Dockerfile .
 docker build -t node-image -f ./API_NODE/Dockerfile .
 
