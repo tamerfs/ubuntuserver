@@ -1,9 +1,14 @@
-FROM node:10-alpine
+#FROM node:10-alpine
+FROM node:12-stretch
 # Create app directory
 USER node
 RUN mkdir /home/node/code
+RUN pwd
 WORKDIR /home/node/app
-COPY --chown=node:node . .
+RUN pwd
+COPY --chown=node:node .. .
+RUN ls -al
+#C:\WorkSpace\05_VM e Containers\ubuntuserver\API_NODE\Dockerfile
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
 # where available (npm@5+)

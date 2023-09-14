@@ -82,7 +82,7 @@ docker run -d -v $(pwd)/API_NODE:$(pwd)/persistent_disk/node -p 0.0.0.0:9001:900
  --link -> relacionar um conteiner no outro (Add link to another container)
  --rm ->  remove se ja tiver um de pé
  --name  -> nome do novo container a subir
- --init ->
+ --init -> sinalizador para indicar que um processo init deve ser usado como o PID 1 no contêiner.
  --restart=always -> para coocar um container para rodar mesmo quando quebrar
 $(pwd) -> print working directory/ coloca o diretorio atual no comando como uma variavel
 
