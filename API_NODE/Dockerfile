@@ -1,13 +1,20 @@
 #FROM node:10-alpine
+#FROM node:10-slim
 #FROM node:12-stretch
 FROM node:16
 # Create app directory
 USER node
+RUN echo "$PWD"
+RUN pwd
 RUN mkdir /home/node/code
-RUN echo "PWD is: $PWD"
+RUN echo "$PWD"
+RUN pwd
 WORKDIR /home/node/app
-RUN echo "PWD is: $PWD"
-COPY --chown=node:node .. .
+RUN echo "$PWD"
+RUN pwd
+COPY --chown=node:node ../API_NODE .
+RUN echo "$PWD"
+RUN pwd
 RUN ls -al
 #C:\WorkSpace\05_VM e Containers\ubuntuserver\API_NODE\Dockerfile
 # Install app dependencies
