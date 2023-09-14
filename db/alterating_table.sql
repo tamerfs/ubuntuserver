@@ -1,3 +1,5 @@
+ALTER USER 'root' IDENTIFIED WITH mysql_native_password BY 'databasesql';
+flush privileges;
 USE DATALAKE_SQL;
 INSERT INTO products VALUE(0, 'produto_21', 2500);
 INSERT INTO products VALUE(0, 'produto_22', 5500);

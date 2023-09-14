@@ -43,6 +43,8 @@ docker build -t {imagem_a_baixar} --build-arg PORT_ARG=8081  -f {diretorio-do-do
 docker build -t mysql-image -f ./db/Dockerfile .
 docker build -t node-image -f ./API_NODE/Dockerfile .
 
+docker build -t {imagem_a_baixar} --no-cache --progress=plain -f {diretorio-do-dockerfile}/Dockerfile .
+
  -f -> folder file / endereço do dockerfile
  -t -> taguear a imagem a subir
 Dockerfile . -> parametros que podemos usar na hora da criação da imagem
