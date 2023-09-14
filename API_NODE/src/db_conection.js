@@ -4,6 +4,7 @@ const mysql = require('mysql')
 configurações mysql
 */
 const ENV_HOST = '172.17.0.2'
+// const ENV_HOST = 'instance-mysql',
 
 const connectionDb = mysql.createConnection({
 // host: 'mysql-container-instance',

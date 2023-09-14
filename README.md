@@ -26,6 +26,7 @@ docker ps -a => ver todos os containers mesmo parados
 docker logs 9e1a64dfc970 {container ID}
 sudo aa-remove-unknown {limpa o apparmor do linux que bloqueia as ações que desligam os dockers criados}
 docker ps -a -q => delete all stopped containers with docker rm 
+docker cp index.js instance-node-16:/home/node/app/src/index.js
 ```
 
 ### ***build*** [docs](https://docs.docker.com/engine/reference/commandline/build/)
