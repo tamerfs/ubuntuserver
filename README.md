@@ -22,7 +22,7 @@ docker image ls    =>     lista as imagens do docker baixadas no local disponív
 docker ps  =>  mostra os processos ou containes ativos.
 docker rmi {idImagem}  =>  remover imagens pelo ID ( -f para forçar )  
 docker inspect {nome do container} =>  para ver informações de um container 
-docker ps -a -q ( parar todos os containers e exlcuir)
+docker ps -a => ver todos os containers mesmo parados
 docker logs 9e1a64dfc970 {container ID}
 sudo aa-remove-unknown {limpa o apparmor do linux que bloqueia as ações que desligam os dockers criados}
 docker ps -a -q => delete all stopped containers with docker rm 
@@ -43,7 +43,7 @@ docker build -t {imagem_a_baixar} --build-arg PORT_ARG=8081  -f {diretorio-do-do
 docker build -t mysql-image -f ./db/Dockerfile .
 docker build -t node-image -f ./API_NODE/Dockerfile .
 
- -f -> endereço do dockerfile
+ -f -> folder file / endereço do dockerfile
  -t -> taguear a imagem a subir
 Dockerfile . -> parametros que podemos usar na hora da criação da imagem
 
@@ -70,18 +70,19 @@ docker run -d --rm --name {nome-do-meu-container} {nome-da-minha-image-salva}
 docker run -d -v $(pwd)/data:/var/lib/{meu-programa} --rm --name meu-container-instancia minha-imagem-baixada 
 
 docker run -d -v $(pwd)/db:$(pwd)/persistent_disk/mysql --rm --name mysql-container-instancia mysql-image 
-docker run -d -v $(pwd)/API_NODE:$(pwd)/persistent_disk/node -p9001:9001 --link instance-mysql --rm --name instance-node-alpine node-image
-docker run -d -v $(pwd)/API_NODE:$(pwd)/persistent_disk/node -p9001:9001 --link instance-mysql --restart=always --name instance-node alpine10/node-image
+docker run -d -v $(pwd)/API_NODE:$(pwd)/persistent_disk/node -p 0.0.0.0:9001:9001 --link instance-mysql --rm --name instance-node-alpine node-image
+docker run -d -v $(pwd)/API_NODE:$(pwd)/persistent_disk/node -p 0.0.0.0:9001:9001 --link instance-mysql --restart=always --name instance-node alpine-10/node-image
 
 
  -d -> daemon ou detach, para executar mas desacoplado deixando o terminal livre
  -v -> volume, ou seja, liga a pasta host a pasta container (bind mount a volume)
- -p -> porta do link entre os dois
+ -p -> porta do link entre os dois --publish
  -t -> Aloca um pseudo TTY 
  -i -> Keep STDIN open even if not attached (interactive)
  --link -> relacionar um conteiner no outro (Add link to another container)
  --rm ->  remove se ja tiver um de pé
  --name  -> nome do novo container a subir
+ --init ->
  --restart=always -> para coocar um container para rodar mesmo quando quebrar
 $(pwd) -> print working directory/ coloca o diretorio atual no comando como uma variavel
 
@@ -144,3 +145,7 @@ ____________________________
 [journalctl -f](https://www.digitalocean.com/community/tutorials/how-to-use-journalctl-to-view-and-manipulate-systemd-logs-pt)<br>
 [Docker and Node best practices](https://github.com/nodejs/docker-node/blob/main/docs/BestPractices.md)<br>
 [Digital ocean and Node](https://www.digitalocean.com/community/tutorials/how-to-build-a-node-js-application-with-docker)<br>
+[Docker docs env e outros](https://docs.docker.com/engine/reference/builder/#cmd)<br>
+[networ docker](https://docs.docker.com/network/)<br>
+[multi-stage uilds](https://docs.docker.com/build/building/multi-stage/)<br>
+[env replacement](https://docs.docker.com/engine/reference/builder/#environment-replacement)<br>
