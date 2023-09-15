@@ -161,3 +161,5 @@ ____________________________
 [env replacement](https://docs.docker.com/engine/reference/builder/#environment-replacement)<br>
 [linux alpine](https://github.com/alpinelinux/docker-alpine)<br>
 [alpine run and exec](https://linux.how2shout.com/how-to-create-alpine-container-in-docker/)<br>
+[uuid in mysql server](https://www.mysqltutorial.org/mysql-uuid/)<br>
+[encrypt mysql server](https://www.w3resource.com/mysql/encryption-and-compression-functions/encrypt().php#:~:text=MySQL%20ENCRYPT()%20encrypts%20a,systems%2C%20it%20will%20return%20NULL.)
