@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS application_user(
     cpf_cnpj VARCHAR(255),
     email VARCHAR(255),
     data_nascimento DATE
-)
+);
 
 INSERT INTO application_user (id, username, password) 
     VALUES 
