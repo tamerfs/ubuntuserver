@@ -43,6 +43,7 @@ docker build -t {imagem_a_baixar} --build-arg PORT_ARG=8081  -f {diretorio-do-do
 
 docker build -t mysql-image -f ./db/Dockerfile .
 docker build -t node-image -f ./API_NODE/Dockerfile .
+docker run -it --name myalpine -d alpine
 
 docker build -t {imagem_a_baixar} --no-cache --progress=plain -f {diretorio-do-dockerfile}/Dockerfile .
 
@@ -101,6 +102,8 @@ docker exec -i {nome-do-meu-container} {meu-programa} {comandos utilizados}
 
 docker exec -i instance-mysql mysql -uroot -pdatabasesql < db/initial_script_database.sql
 
+docker exec -it --user root myalpine /bin/sh
+
 nome-do-meu-container -> nome do container que vamos utilizar como mysql-container
 meu-programa -> será o programa que vamos utilizar como por exemplo o mysql
  -u  -> usuário
@@ -154,3 +157,4 @@ ____________________________
 [multi-stage uilds](https://docs.docker.com/build/building/multi-stage/)<br>
 [env replacement](https://docs.docker.com/engine/reference/builder/#environment-replacement)<br>
 [linux alpine](https://github.com/alpinelinux/docker-alpine)<br>
+[alpine run and exec](https://linux.how2shout.com/how-to-create-alpine-container-in-docker/)<br>
