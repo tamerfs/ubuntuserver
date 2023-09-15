@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS application_user(
     password VARCHAR(255) NOT NULL,
     user_last_name VARCHAR(255),
     user_first_name VARCHAR(255),
-    cpf/cnpj VARCHAR(255),
+    cpf_cnpj VARCHAR(255),
     email VARCHAR(255),
     data_nascimento DATE
 )
