@@ -74,9 +74,12 @@ docker run -d --rm --name {nome-do-meu-container} {nome-da-minha-image-salva}
 docker run -d -v $(pwd)/data:/var/lib/{meu-programa} --rm --name meu-container-instancia minha-imagem-baixada 
 
 docker run -d -v $(pwd)/db:$(pwd)/persistent_disk/mysql --rm --name mysql-container-instancia mysql-image 
+docker run -d -v $(pwd)/db:$(pwd)/persistent_disk/mysql --rm -p 0.0.0.0:3306:3306 --name mysql-exposed mysql-image 
+
 docker run -d -v $(pwd)/API_NODE:$(pwd)/persistent_disk/node -p 0.0.0.0:9001:9001 --link instance-mysql --rm --name instance-node-alpine node-image
 docker run -d -v $(pwd)/API_NODE:$(pwd)/persistent_disk/node -p 0.0.0.0:9001:9001 --link instance-mysql --restart=always --name instance-node alpine-10/node-image
 
+-p 12345:3306
 
  -d -> daemon ou detach, para executar mas desacoplado deixando o terminal livre
  -v -> volume, ou seja, liga a pasta host a pasta container (bind mount a volume)
@@ -102,8 +105,6 @@ docker exec -i {nome-do-meu-container} {meu-programa} {comandos utilizados}
 
 docker exec -i instance-mysql mysql -uroot -pdatabasesql < db/initial_script_database.sql
 
-docker exec -it --user root myalpine /bin/sh
-
 nome-do-meu-container -> nome do container que vamos utilizar como mysql-container
 meu-programa -> será o programa que vamos utilizar como por exemplo o mysql
  -u  -> usuário
@@ -118,6 +119,8 @@ meu-programa -> será o programa que vamos utilizar como por exemplo o mysql
 docker exec -it {meu-container} /bin/bash
 
 docker exec -it mysql-container /bin/bash
+
+docker exec -it --user root myalpine /bin/sh
 
 meu-container -> container rodando que vamos acessar
 bin/bash -> abre na linha para usar o bash/prompt para comandos
