@@ -48,7 +48,7 @@ app.get(INIT_DIR, (req, res) => {
 
 app.get(USER_DIR, (req, res) => {
   connectionDb.query(
-    'SELECT * FROM application_user',
+    'SELECT username , BIN_TO_UUID(id) as id FROM application_user ',
     (error, results) => {
       if (error) {
         console.log('erro na arrow function - Erro ao carregar a query')
@@ -58,8 +58,8 @@ app.get(USER_DIR, (req, res) => {
       res.send(
         results.map(
           item => ({
-            name: item.name,
-            price: item.price
+            id: item.id,
+            username: item.username
           })
         )
       )
