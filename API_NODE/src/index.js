@@ -17,8 +17,6 @@ app.get('/', (req, res) => {
   res.send(`
   <h1>Node server running on Docker<h1/> <br>
   <h4> Acesse ao <a target="_blank" href="${INIT_DIR}">LINK<a/><h4/>
-  <h4> Acesse ao <a target="_blank" href="${PORT}${INIT_DIR}">LINK<a/><h4/>
-  <h4> Acesse ao <a target="_blank" href="http://${HOST}:${PORT}${INIT_DIR}">LINK<a/><h4/>
    `)
 })
 
