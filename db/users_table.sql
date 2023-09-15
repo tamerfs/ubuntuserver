@@ -13,6 +13,8 @@ CREATE TABLE IF NOT EXISTS application_user(
 
 INSERT INTO application_user (id, username, password) 
     VALUES 
-        (UUID_TO_BIN(UUID()),'tamer', PASSWORD('tamer1914')),
-        (UUID_TO_BIN(UUID()),'admin', PASSWORD('admin1918')),
-        (UUID_TO_BIN(UUID()),'samuel', PASSWORD('samuel1995'));
+        (UUID_TO_BIN(UUID()),'tamer', MD5('tamer1914')),
+        (UUID_TO_BIN(UUID()),'admin', MD5('admin1918')),
+        (UUID_TO_BIN(UUID()),'samuel', MD5('samuel1995')),
+        (UUID_TO_BIN(UUID()),'isabela', MD5('samuel1995'));
+
