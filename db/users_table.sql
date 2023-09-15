@@ -1,3 +1,4 @@
+USE DATABASE_SQL;
 CREATE TABLE IF NOT EXISTS application_user(
     -- uuid uuid DEFAULT uuid_generate_v4(),
     id BINARY(16) PRIMARY KEY,
