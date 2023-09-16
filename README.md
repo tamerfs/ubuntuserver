@@ -26,7 +26,7 @@ docker ps -a => ver todos os containers mesmo parados
 docker logs 9e1a64dfc970 {container ID}
 sudo aa-remove-unknown {limpa o apparmor do linux que bloqueia as ações que desligam os dockers criados}
 docker ps -a -q => delete all stopped containers with docker rm 
-
+docker cp index.js instance-node-16:/home/node/app/src/index.js
 ```
 
 ### ***build*** [docs](https://docs.docker.com/engine/reference/commandline/build/)
@@ -43,7 +43,6 @@ docker build -t {imagem_a_baixar} --build-arg PORT_ARG=8081  -f {diretorio-do-do
 
 docker build -t mysql-image -f ./db/Dockerfile .
 docker build -t node-image -f ./API_NODE/Dockerfile .
-docker run -it --name myalpine -d alpine
 
 docker build -t {imagem_a_baixar} --no-cache --progress=plain -f {diretorio-do-dockerfile}/Dockerfile .
 
@@ -80,7 +79,9 @@ docker run -d -v $(pwd)/db:$(pwd)/persistent_disk/mysql --restart=always -p 0.0.
 docker run -d -v $(pwd)/API_NODE:$(pwd)/persistent_disk/node -p 0.0.0.0:9001:9001 --link instance-mysql --rm --name instance-node-alpine node-image
 docker run -d -v $(pwd)/API_NODE:$(pwd)/persistent_disk/node -p 0.0.0.0:9001:9001 --link instance-mysql --restart=always --name instance-node alpine-10/node-image
 
--p 12345:3306
+docker run -i -e  NGROK_AUTHTOKEN=2VPvMv2eXle1XHe8CInEKnVEGoE_4R4AXxVfwR1TMpUWfD6TE ngrok/ngrok http 0.0.0.0:9001:9001 --domain=resolved-duck-proper.ngrok-free.app --basic-auth 'tamer:mysqldbapi'
+
+docker run -it --name myalpine -d alpine
 
  -d -> daemon ou detach, para executar mas desacoplado deixando o terminal livre
  -v -> volume, ou seja, liga a pasta host a pasta container (bind mount a volume)
@@ -147,6 +148,12 @@ npm install --save express mysql
 
 ____________________________
 [ngronk - tunnel](https://www.tecmint.com/test-local-websites-on-internet-using-ngrok/)
+```
+ngrok http --domain=great-truly-terrier.ngrok-free.app 80
+ngrok http 8000 --basic-auth 'ngrok:issecure'
+docker run -it -e NGROK_AUTHTOKEN=2VPvMv2eXle1XHe8CInEKnVEGoE_4R4AXxVfwR1TMpUWfD6TE ngrok/ngrok http 9001 --domain=resolved-duck-proper.ngrok-free.app --basic-auth 'tamer:apimysql'
+
+```
 [stackoverflow - connection refused on docker container](https://stackoverflow.com/questions/36813690/connection-refused-on-docker-container) <br>
 [superuser - connnect to linux using putty over the internet](https://superuser.com/questions/830568/connnect-to-linux-from-windows-using-putty-over-the-internet)<br>
 [hostinger - tutorial docker](https://www.hostinger.com.br/tutoriais/install-docker-ubuntu)<br>
