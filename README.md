@@ -25,8 +25,11 @@ docker inspect {nome do container} =>  para ver informações de um container
 docker ps -a => ver todos os containers mesmo parados
 docker logs 9e1a64dfc970 {container ID}
 sudo aa-remove-unknown {limpa o apparmor do linux que bloqueia as ações que desligam os dockers criados}
+sudo apparmor_parser -r /etc/apparmor.d/*snap-confine*
+sudo apparmor_parser -r /var/lib/snapd/apparmor/profiles/snap-confine*
 docker ps -a -q => delete all stopped containers with docker rm 
 docker cp index.js instance-node-16:/home/node/app/src/index.js
+
 ```
 
 ### ***build*** [docs](https://docs.docker.com/engine/reference/commandline/build/)
@@ -77,9 +80,16 @@ docker run -d -v $(pwd)/db:$(pwd)/persistent_disk/mysql --rm -p 0.0.0.0:3306:330
 docker run -d -v $(pwd)/db:$(pwd)/persistent_disk/mysql --restart=always -p 0.0.0.0:3306:3306 --name mysql-exposed mysql-image 
 
 docker run -d -v $(pwd)/API_NODE:$(pwd)/persistent_disk/node -p 0.0.0.0:9001:9001 --link instance-mysql --rm --name instance-node-alpine node-image
-docker run -d -v $(pwd)/API_NODE:$(pwd)/persistent_disk/node -p 0.0.0.0:9001:9001 --link instance-mysql --restart=always --name instance-node alpine-10/node-image
+docker run -d -v $(pwd)/API_NODE:$(pwd)/persistent_disk/node -p 0.0.0.0:4040:4040 --link mysql-exposed --restart=always --name instance-node node-16/node-image
 
 docker run -i -e  NGROK_AUTHTOKEN=2VPvMv2eXle1XHe8CInEKnVEGoE_4R4AXxVfwR1TMpUWfD6TE ngrok/ngrok http 0.0.0.0:9001:9001 --domain=resolved-duck-proper.ngrok-free.app --basic-auth 'tamer:mysqldbapi'
+docker run -it -e NGROK_AUTHTOKEN=2VPvMv2eXle1XHe8CInEKnVEGoE_4R4AXxVfwR1TMpUWfD6TE ngrok/ngrok http 0.0.0.0:4040 --domain=lion-natural-factually.ngrok-free.app
+docker run -it -e NGROK_AUTHTOKEN=2VPvMv2eXle1XHe8CInEKnVEGoE_4R4AXxVfwR1TMpUWfD6TE ngrok/ngrok tunnel --label edge=edghts_2VUyMkTZa8D0cM6Bivdb4HiUZzA http://localhost:80
+
+ngrok http --domain=lion-natural-factually.ngrok-free.app 9001 --basic-auth 'tamer:dbmysqlapi'
+
+docker run --restart-always -it -v $PWD:/build ubuntu
+
 
 docker run -it --name myalpine -d alpine
 
