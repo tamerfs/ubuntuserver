@@ -26,7 +26,7 @@ docker ps -a => ver todos os containers mesmo parados
 docker logs 9e1a64dfc970 {container ID}
 sudo aa-remove-unknown {limpa o apparmor do linux que bloqueia as ações que desligam os dockers criados}
 docker ps -a -q => delete all stopped containers with docker rm 
-docker cp index.js instance-node-16:/home/node/app/src/index.js
+
 ```
 
 ### ***build*** [docs](https://docs.docker.com/engine/reference/commandline/build/)
@@ -75,6 +75,7 @@ docker run -d -v $(pwd)/data:/var/lib/{meu-programa} --rm --name meu-container-i
 
 docker run -d -v $(pwd)/db:$(pwd)/persistent_disk/mysql --rm --name mysql-container-instancia mysql-image 
 docker run -d -v $(pwd)/db:$(pwd)/persistent_disk/mysql --rm -p 0.0.0.0:3306:3306 --name mysql-exposed mysql-image 
+docker run -d -v $(pwd)/db:$(pwd)/persistent_disk/mysql --restart=always -p 0.0.0.0:3306:3306 --name mysql-exposed mysql-image 
 
 docker run -d -v $(pwd)/API_NODE:$(pwd)/persistent_disk/node -p 0.0.0.0:9001:9001 --link instance-mysql --rm --name instance-node-alpine node-image
 docker run -d -v $(pwd)/API_NODE:$(pwd)/persistent_disk/node -p 0.0.0.0:9001:9001 --link instance-mysql --restart=always --name instance-node alpine-10/node-image

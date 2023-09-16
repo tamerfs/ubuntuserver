@@ -1,8 +1,7 @@
-const { connectionDb, ENV_HOST } = require('./db_conection')
+const { connectionDb } = require('./db_conection')
 const express = require('express')
-/*
-configurações node API express
-*/
+
+// configurações node API express
 
 const app = express()
 const PORT = 9001
@@ -10,8 +9,9 @@ const HOST = '0.0.0.0'
 const INIT_DIR = '/products'
 const USER_DIR = '/users'
 
-app.listen(PORT, HOST, () => {
-  console.log(`Running on http://${HOST}:${PORT}`)
+app.listen(PORT, HOST, (err) => {
+  if (err) throw err
+  console.log(`Running on http://localhost:${PORT}`)
 })
 
 app.get('/', (req, res) => {
