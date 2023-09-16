@@ -86,9 +86,8 @@ docker run -i -e  NGROK_AUTHTOKEN=2VPvMv2eXle1XHe8CInEKnVEGoE_4R4AXxVfwR1TMpUWfD
 docker run -it -e NGROK_AUTHTOKEN=2VPvMv2eXle1XHe8CInEKnVEGoE_4R4AXxVfwR1TMpUWfD6TE ngrok/ngrok http 0.0.0.0:4040 --domain=lion-natural-factually.ngrok-free.app
 docker run -it -e NGROK_AUTHTOKEN=2VPvMv2eXle1XHe8CInEKnVEGoE_4R4AXxVfwR1TMpUWfD6TE ngrok/ngrok tunnel --label edge=edghts_2VUyMkTZa8D0cM6Bivdb4HiUZzA http://localhost:80
 
-ngrok http --domain=lion-natural-factually.ngrok-free.app 9001 --basic-auth 'tamer:dbmysqlapi'
 
-docker run --restart-always -it -v $PWD:/build ubuntu
+docker run --restart-always -d -v $(pwd)/ngrok:/$(pwd)/persistent_disk/ngrok --name instancia-linux ubuntu 
 
 
 docker run -it --name myalpine -d alpine
@@ -162,7 +161,7 @@ ____________________________
 ngrok http --domain=great-truly-terrier.ngrok-free.app 80
 ngrok http 8000 --basic-auth 'ngrok:issecure'
 docker run -it -e NGROK_AUTHTOKEN=2VPvMv2eXle1XHe8CInEKnVEGoE_4R4AXxVfwR1TMpUWfD6TE ngrok/ngrok http 9001 --domain=resolved-duck-proper.ngrok-free.app --basic-auth 'tamer:apimysql'
-
+ngrok http --domain=lion-natural-factually.ngrok-free.app 9001 --basic-auth 'tamer:dbmysqlapi'
 ```
 [stackoverflow - connection refused on docker container](https://stackoverflow.com/questions/36813690/connection-refused-on-docker-container) <br>
 [superuser - connnect to linux using putty over the internet](https://superuser.com/questions/830568/connnect-to-linux-from-windows-using-putty-over-the-internet)<br>
