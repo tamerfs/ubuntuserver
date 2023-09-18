@@ -27,7 +27,7 @@ app.get('/', (req, res) => {
 
 app.get(INIT_DIR, (req, res) => {
   connectionDb.query(
-    'SELECT * FROM products',
+    'SELECT * FROM RAW_products',
     (error, results) => {
       if (error) {
         console.log('erro na arrow function - Erro ao carregar a query')

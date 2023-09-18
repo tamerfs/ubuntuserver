@@ -1,0 +1,37 @@
+USE DATALAKE_SQL;
+INSERT INTO RAW_products VALUE(0, 'produto_01', 2500);
+INSERT INTO RAW_products VALUE(0, 'produto_02', 5500);
+INSERT INTO RAW_products VALUE(0, 'produto_03', 1700);
+INSERT INTO RAW_products VALUE(0, 'produto_04', 1900);
+INSERT INTO RAW_products VALUE(0, 'produto_05', 7300);
+INSERT INTO RAW_products VALUE(0, 'produto_06', 2900);
+INSERT INTO RAW_products VALUE(0, 'produto_07', 4600);
+INSERT INTO RAW_products VALUE(0, 'produto_08', 7100);
+INSERT INTO RAW_products VALUE(0, 'produto_09', 6000);
+INSERT INTO RAW_products VALUE(0, 'produto_10', 3800);
+INSERT INTO RAW_products VALUE(0, 'produto_11', 1200);
+INSERT INTO RAW_products VALUE(0, 'produto_12', 5600);
+INSERT INTO RAW_products VALUE(0, 'produto_13', 7700);
+INSERT INTO RAW_products VALUE(0, 'produto_14', 2500);
+INSERT INTO RAW_products VALUE(0, 'produto_15', 5500);
+INSERT INTO RAW_products VALUE(0, 'produto_16', 1700);
+INSERT INTO RAW_products VALUE(0, 'produto_17', 1900);
+INSERT INTO RAW_products VALUE(0, 'produto_18', 7300);
+INSERT INTO RAW_products VALUE(0, 'produto_19', 2900);
+INSERT INTO RAW_products VALUE(0, 'produto_20', 4600);
+INSERT INTO RAW_products VALUE(0, 'produto_21', 2500);
+INSERT INTO RAW_products VALUE(0, 'produto_22', 5500);
+INSERT INTO RAW_products VALUE(0, 'produto_23', 1700);
+INSERT INTO RAW_products VALUE(0, 'produto_24', 1900);
+INSERT INTO RAW_products VALUE(0, 'produto_25', 7300);
+INSERT INTO RAW_products VALUE(0, 'produto_26', 2900);
+INSERT INTO RAW_products VALUE(0, 'produto_27', 4600);
+INSERT INTO RAW_products VALUE(0, 'produto_28', 7100);
+INSERT INTO RAW_products VALUE(0, 'produto_29', 6000);
+INSERT INTO RAW_products VALUE(0, 'produto_30', 3800);
+INSERT INTO RAW_products VALUE(0, 'produto_31', 1200);
+INSERT INTO RAW_products VALUE(0, 'produto_32', 5600);
+INSERT INTO RAW_products VALUE(0, 'produto_33', 7700);
+
+
+RENAME TABLE products TO RAW_products;
