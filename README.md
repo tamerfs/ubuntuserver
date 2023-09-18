@@ -46,6 +46,7 @@ docker build -t {imagem_a_baixar} --build-arg PORT_ARG=8081  -f {diretorio-do-do
 
 docker build -t mysql-image -f ./db/Dockerfile .
 docker build -t node-image -f ./API_NODE/Dockerfile .
+docker build -t ubuntu -f ./ngrok/Dockerfile .
 
 docker build -t {imagem_a_baixar} --no-cache --progress=plain -f {diretorio-do-dockerfile}/Dockerfile .
 
@@ -82,21 +83,21 @@ docker run -d -v $(pwd)/db:$(pwd)/persistent_disk/mysql --restart=always -p 0.0.
 docker run -d -v $(pwd)/API_NODE:$(pwd)/persistent_disk/node -p 0.0.0.0:9001:9001 --link instance-mysql --rm --name instance-node-alpine node-image
 docker run -d -v $(pwd)/API_NODE:$(pwd)/persistent_disk/node -p 0.0.0.0:4040:4040 --link mysql-exposed --restart=always --name instance-node node-16/node-image
 
+docker run -it -v $(pwd)/ngrok:/$(pwd)/persistent_disk/ngrok --restart=always --name instancia-linux ubuntu 
+docker run -it --name myalpine -d alpine
+
 docker run -i -e  NGROK_AUTHTOKEN=2VPvMv2eXle1XHe8CInEKnVEGoE_4R4AXxVfwR1TMpUWfD6TE ngrok/ngrok http 0.0.0.0:9001:9001 --domain=resolved-duck-proper.ngrok-free.app --basic-auth 'tamer:mysqldbapi'
 docker run -it -e NGROK_AUTHTOKEN=2VPvMv2eXle1XHe8CInEKnVEGoE_4R4AXxVfwR1TMpUWfD6TE ngrok/ngrok http 0.0.0.0:4040 --domain=lion-natural-factually.ngrok-free.app
 docker run -it -e NGROK_AUTHTOKEN=2VPvMv2eXle1XHe8CInEKnVEGoE_4R4AXxVfwR1TMpUWfD6TE ngrok/ngrok tunnel --label edge=edghts_2VUyMkTZa8D0cM6Bivdb4HiUZzA http://localhost:80
 
 
-docker run --restart-always -d -v $(pwd)/ngrok:/$(pwd)/persistent_disk/ngrok --name instancia-linux ubuntu 
-
-
-docker run -it --name myalpine -d alpine
-
  -d -> daemon ou detach, para executar mas desacoplado deixando o terminal livre
- -v -> volume, ou seja, liga a pasta host a pasta container (bind mount a volume)
+
  -p -> porta do link entre os dois --publish
  -t -> Aloca um pseudo TTY 
  -i -> Keep STDIN open even if not attached (interactive)
+
+ funcionamento => diretório/da/imagem/atual: diretório/do/volume
  --link -> relacionar um conteiner no outro (Add link to another container)
  --rm ->  remove se ja tiver um de pé
  --name  -> nome do novo container a subir
@@ -104,7 +105,7 @@ docker run -it --name myalpine -d alpine
  --restart=always -> para coocar um container para rodar mesmo quando quebrar
 $(pwd) -> print working directory/ coloca o diretorio atual no comando como uma variavel
 
-funcionamento => diretório/da/imagem/atual: diretório/do/volume
+
 ```
 
 ### ***exec*** [docs](https://docs.docker.com/engine/reference/commandline/exec/)
@@ -161,7 +162,15 @@ ____________________________
 ngrok http --domain=great-truly-terrier.ngrok-free.app 80
 ngrok http 8000 --basic-auth 'ngrok:issecure'
 docker run -it -e NGROK_AUTHTOKEN=2VPvMv2eXle1XHe8CInEKnVEGoE_4R4AXxVfwR1TMpUWfD6TE ngrok/ngrok http 9001 --domain=resolved-duck-proper.ngrok-free.app --basic-auth 'tamer:apimysql'
+
+ngrok config add-authtoken 2VPvMv2eXle1XHe8CInEKnVEGoE_4R4AXxVfwR1TMpUWfD6TE
+
 ngrok http --domain=lion-natural-factually.ngrok-free.app 9001 --basic-auth 'tamer:dbmysqlapi'
+ngrok http --domain=humble-sculpin-positively.ngrok-free.app 9001 --basic-auth 'tamer:dbmysqlapi'
+ngrok http --domain=kingfish-bold-loudly.ngrok-free.app 9001 --basic-auth 'tamer:dbmysqlapi'
+
+ curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null && echo "deb https://ngrok-agent.s3.amazonaws.com buster main" | tee /etc/apt/sources.list.d/ngrok.list && apt update && apt install ngrok
+
 ```
 [stackoverflow - connection refused on docker container](https://stackoverflow.com/questions/36813690/connection-refused-on-docker-container) <br>
 [superuser - connnect to linux using putty over the internet](https://superuser.com/questions/830568/connnect-to-linux-from-windows-using-putty-over-the-internet)<br>
