@@ -4,7 +4,7 @@
 FROM node:16
 # Create app directory
 USER node
-RUN mkdir /home/node/code
+RUN mkdir /home/node/app
 WORKDIR /home/node/app
 COPY --chown=node:node ../API_NODE .
 #C:\WorkSpace\05_VM e Containers\ubuntuserver\API_NODE\Dockerfile
