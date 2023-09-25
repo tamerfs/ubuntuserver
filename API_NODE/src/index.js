@@ -4,7 +4,7 @@ const express = require('express')
 // configurações node API express
 
 const app = express()
-const PORT = process.env.PORT || 4040
+const PORT = 4040 // process.env.PORT || 4040
 const HOST = '0.0.0.0'
 const INIT_DIR = '/products'
 const USER_DIR = '/users'
