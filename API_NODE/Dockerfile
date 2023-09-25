@@ -4,18 +4,9 @@
 FROM node:16
 # Create app directory
 USER node
-RUN echo "$PWD"
-RUN pwd
-RUN mkdir /home/node/code
-RUN echo "$PWD"
-RUN pwd
+RUN mkdir /home/node/app
 WORKDIR /home/node/app
-RUN echo "$PWD"
-RUN pwd
 COPY --chown=node:node ../API_NODE .
-RUN echo "$PWD"
-RUN pwd
-RUN ls -al
 #C:\WorkSpace\05_VM e Containers\ubuntuserver\API_NODE\Dockerfile
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
