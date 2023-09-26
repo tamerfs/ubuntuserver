@@ -95,3 +95,5 @@ __POST__ com token acesso<br>
     Endpoint => '/products/add'<br>
     Response =><br>
         Query => 'Insert into RAW_products %%;' <br>
+
+[Status Code](https://snyk.io/advisor/npm-package/http-status-codes#readme)
