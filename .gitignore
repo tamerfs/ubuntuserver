@@ -2,6 +2,8 @@ node_modules
 .eslintrc.js
 API_MS_AUTH
 documentation 
-
+ngrok/ngrok
+ngrok/ngrok-stable-linux-amd64.zip
+persistent_disk/
 
 
