@@ -22,6 +22,8 @@ _____________
 |dac181a97b7b | lts-16/node-image | "docker-entrypoint.s…" | 2 days ago | Up 21 minutes | 0.0.0.0:4040->4040/tcp, 9001/tcp | node-prd |
 |780f8f224e45 | mysql-image | "docker-entrypoint.s…" | 2 days ago | Up 29 minutes | 0.0.0.0:3306->3306/tcp, 33060/tcp | mysql-prd |
 
+dh -> 9001
+prd -> 4040
 ______
 
 ## Imagens no docker

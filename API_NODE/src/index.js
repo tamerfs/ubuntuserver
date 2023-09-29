@@ -11,7 +11,7 @@ const { usersRoute } = require('./routes/users.route')
 
 // configurações node API express == ORIGINAL
 const app = express()
-const PORT = 4040
+const PORT = 9001
 const HOST = '0.0.0.0'
 
 // configuração da aplicação
