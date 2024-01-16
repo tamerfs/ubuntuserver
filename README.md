@@ -110,15 +110,24 @@ __POST__ com token acesso<br>
 
 
 
-conteiner 4980e2ede41a - erro com conexão ao banco
-loggin :
+conteiner 4980e2ede41a - node-dh - conexão com o banco com LAN 172.17.0.2
+porta interna e porta externa 9001 -> 9001
+versao da aplicação V1 ( scr com db_conection.js index.js )
+API com products e users
 
-'''
-Running on http://localhost:9001
-/home/node/app/src/db_conection.js:15
-  if (err) throw err
-           ^
+conteiner 926bbb5e1d51 - node-dev - conexão com o banco com LAN 172.17.0.2
+CORRIGIR DIRECIONAMENTO DE PORTAS
+no container esta 5050
+na face externa?
+versao da aplicação V1 ( scr com db_conection.js index.js )
+API com products e users
 
-Error: connect ENETUNREACH 192.168.0.100:3306
-    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1278:16)
-'''
+conteiner bf86466ef641 - node-prd - conexão com o banco com LAN 172.17.0.2
+porta interna e porta externa  9001 -> 9001
+versao da aplicação V1 ( scr com db_conection.js index.js )
+API com products e users
+
+conteiner f3b39969ca93 - node-hml - conexão com o banco com LAN 172.17.0.2
+porta interna e porta externa  4040 -> 4040
+versao da aplicação V1 ( scr com db_conection.js index.js )
+API com products e users
