@@ -13,9 +13,11 @@
 
 *git pull -> serverubuntu ( /home/tamer/dockerserver ou ~/dockerserver )*
 
+cd /var/lib/docker/containers/
+
 _____________
 
-## Containers no docker
+## Images no docker
 
 | CONTAINER ID | IMAGE | COMMAND | CREATED | STATUS | PORTS | NAMES |
 |---|---|---|---|---|---|---|
@@ -24,14 +26,19 @@ _____________
 
 dh -> 9001
 prd -> 4040
+EXPOSE -> você pode informar ao Docker que o contêiner escuta nas portas de rede indicadas durante o tempo de execução.
+[host_port/porta de acesso]:[container_port/porta da aplicação]
 ______
 
-## Imagens no docker
+## Conteiners no docker
 
-| CONTAINER ID | IMAGE | COMMAND | CREATED | STATUS | PORTS | NAMES |
-|---|---|---|---|---|---|---|
-|dac181a97b7b | lts-16/node-image | "docker-entrypoint.s…" | 2 days ago | Up 21 minutes | 0.0.0.0:4040->4040/tcp, 9001/tcp | node-prd |
-|780f8f224e45 | mysql-image | "docker-entrypoint.s…" | 2 days ago | Up 29 minutes | 0.0.0.0:3306->3306/tcp, 33060/tcp | mysql-prd |
+| CONTAINER ID | IMAGE | PORTS | NAMES | config.v2.json  | ExposedPorts| "Env":| CONT IP e Ports"| HOST IP e PORT |
+|---|---|---|---|---|---|---|---|---|
+|4980e2ede41a | 20ffacb39c7e| 0.0.0.0:9001->9001/tcp              | node-dh   | "3001/tcp":{}             | "PORT=3001" | 172.17.0.3:3001/tcp | 0.0.0.0:3001 |
+|926bbb5e1d51 | 20ffacb39c7e| 0.0.0.0:4040->3001/tcp , 5050/tcp   | node-dev  | {3001/tcp:{},5050/tcp:{}} |             |                     |              |
+|bf86466ef641 | 20ffacb39c7e| 0.0.0.0:9001->9001/tcp              | node-prd  |                           |             |                     |              |
+|f3b39969ca93 | 20ffacb39c7e| 0.0.0.0:4040->4040/tcp, 9001/tcp    | node-hml  |                           |             |                     |              |
+|9c14e165eb20 | b4d444aa7fa9| 0.0.0.0:3306->3306/tcp, 33060/tcp   | mysql-prd |                           |             |                     |              |
 
 ______
 
@@ -39,7 +46,7 @@ ______
 
 | Database | tables | collumns |
 |--- |--- |--- |
-| DATALAKE_SQL | RAW_products | id,<br>name,<br>price |
+| DATALAKE_SQL | RAW_products     | id,<br>name,<br>price |
 | DATALAKE_SQL | application_user | id,<br>username,<br>password,<br>user_last_name,<br>user_first_name,<br>cpf_cnpj,<br>email,<br>data_nascimento |
 
 ______
@@ -99,3 +106,19 @@ __POST__ com token acesso<br>
         Query => 'Insert into RAW_products %%;' <br>
 
 [Status Code](https://snyk.io/advisor/npm-package/http-status-codes#readme)
+
+
+
+
+conteiner 4980e2ede41a - erro com conexão ao banco
+loggin :
+
+'''
+Running on http://localhost:9001
+/home/node/app/src/db_conection.js:15
+  if (err) throw err
+           ^
+
+Error: connect ENETUNREACH 192.168.0.100:3306
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1278:16)
+'''

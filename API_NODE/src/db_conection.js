@@ -2,7 +2,7 @@ const mysql = require('mysql')
 
 // configurações mysql
 
-const ENV_HOST = ['instance-mysql', '192.168.0.100', '172.17.0.2']
+const ENV_HOST = ['instance-mysql', '192.168.1.100', '172.17.0.2']
 
 const connectionDb = mysql.createConnection({
   host: ENV_HOST[1],
