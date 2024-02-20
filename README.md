@@ -12,7 +12,7 @@
 -> adicionar CI/CD com jenkins para o repo main <br>
 
 *git pull -> serverubuntu ( /home/tamer/dockerserver ou ~/dockerserver )*
-
+*tamer19141918*
 cd /var/lib/docker/containers/
 
 _____________
